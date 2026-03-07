@@ -22,10 +22,15 @@ const rolesByType = {
 const app = express();
 // app.use(cors());
 app.use(cors({
-  origin: 'https://main.d395dqck1v36zk.amplifyapp.com',  // Exact your site URL
-  methods: ['GET', 'POST', 'OPTIONS'],  // Add OPTIONS
-  allowedHeaders: ['Content-Type']  // For audio upload
+  origin: 'https://main.d395dqck1v36zk.amplifyapp.com',
+  methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  preflightContinue: false,
+  optionsSuccessStatus: 200 // some browsers need this
 }));
+
+// This line ensures OPTIONS is handled even if no route matches
+app.options('*', cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
@@ -2006,5 +2011,6 @@ app.post('/api/save-transcripts', async (req, res) => {
 // 🚀 Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT} (DynamoDB - Users table only)`));
+
 
 
