@@ -22,20 +22,7 @@ const rolesByType = {
 const app = express();
 // app.use(cors());
 // After app = express()
-app.use(cors({
-  origin: 'https://main.d395dqck1v36zk.amplifyapp.com',
-  methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  optionsSuccessStatus: 200
-}));
-
-// Explicitly handle OPTIONS for every path
-app.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Origin', 'https://main.d395dqck1v36zk.amplifyapp.com');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.sendStatus(200);
-});
+app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
@@ -2016,6 +2003,7 @@ app.post('/api/save-transcripts', async (req, res) => {
 // 🚀 Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT} (DynamoDB - Users table only)`));
+
 
 
 
