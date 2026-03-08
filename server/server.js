@@ -929,7 +929,7 @@ app.post("/api/getStats", async (req, res) => {
 
 
 // 🧠 Sarvam AI Integration
-app.post('/ask', async (req, res) => {
+app.post('/api/ask', async (req, res) => {
   const { question, topic, stance, type, transcripts } = req.body;
   if (!question || !topic || !stance || !type || !Array.isArray(transcripts)) {
     return res.status(400).json({ error: 'Missing or invalid fields in /ask request' });
@@ -2013,6 +2013,7 @@ app.post('/api/save-transcripts', async (req, res) => {
 // 🚀 Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT} (DynamoDB - Users table only)`));
+
 
 
 
