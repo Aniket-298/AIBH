@@ -22,7 +22,13 @@ const rolesByType = {
 const app = express();
 // app.use(cors());
 // After app = express()
-app.use(cors());
+app.use(cors({
+  origin: [
+    "https://main.xxxxxx.amplifyapp.com",
+    "http://localhost:3000"
+  ],
+  credentials: true
+}));
 app.use(express.json());
 app.use(bodyParser.json());
 
@@ -2003,6 +2009,7 @@ app.post('/api/save-transcripts', async (req, res) => {
 // 🚀 Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT} (DynamoDB - Users table only)`));
+
 
 
 
