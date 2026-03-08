@@ -27,6 +27,8 @@ app.use(cors({
     "https://main.d395dqck1v36zk.amplifyapp.com",
     "http://localhost:3000"
   ],
+  methods: ["GET", "POST", "OPTIONS"],//this
+  allowedHeaders: ["Content-Type", "Authorization"],//this
   credentials: true
 }));
 app.use(express.json());
@@ -2009,6 +2011,7 @@ app.post('/api/save-transcripts', async (req, res) => {
 // 🚀 Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT} (DynamoDB - Users table only)`));
+
 
 
 
