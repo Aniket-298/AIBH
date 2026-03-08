@@ -34,7 +34,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 const client = new SarvamAIClient({ apiSubscriptionKey: process.env.SARVAM_API_KEY });
-const GEMINI_API_KEY = "AIzaSyBHegUnS4i4YRxv7NseCjimY18HSe8_QVY";
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -2013,6 +2013,7 @@ app.post('/api/save-transcripts', async (req, res) => {
 // 🚀 Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT} (DynamoDB - Users table only)`));
+
 
 
 
