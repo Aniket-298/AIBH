@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import io from "socket.io-client";
 
 // NEW – correct production URL
-const socket = io("https://d2ygbmjp9j7h0l.cloudfront.net", { 
+const socket = io("http://localhost:5001", { 
   path: "/socket.io",    
   transports: ["websocket"], 
   autoConnect: false
@@ -451,4 +451,5 @@ export default function Hangout() {
       </div>
     </div>
   );
+
 }
