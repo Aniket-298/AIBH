@@ -31,6 +31,7 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"],//this
   credentials: true
 }));
+app.options('*', cors()); 
 app.use(express.json());
 app.use(bodyParser.json());
 
@@ -2011,6 +2012,7 @@ app.post('/api/save-transcripts', async (req, res) => {
 // 🚀 Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT} (DynamoDB - Users table only)`));
+
 
 
 
