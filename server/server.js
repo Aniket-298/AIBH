@@ -428,92 +428,6 @@ app.post('/save-video-progress', async (req, res) => {
     res.status(500).json({ error: "Failed to save progress" });
   }
 });
-// app.post('/evaluate-pronunciation-and-understanding', upload.single('audio'), async (req, res) => {
-  
-//   try {
-//     const summary = req.body.summary;
-//     console.log("BODY:", req.body);
-//       console.log("FILE:", req.file);
-//     if (!summary) {
-//       return res.status(400).json({ error: "No summary provided" });
-//     }
-//     if (!req.file) {
-//       return res.status(400).json({ error: "No audio received" });
-//     }
-
-//     const model = genAI.getGenerativeModel({
-//       model: "gemini-3-flash-preview", // keep exactly what you already use
-//       generationConfig: { responseMimeType: "application/json" }
-//     });
-
-//     const prompt = `
-// Target Summary: ${JSON.stringify(summary)}
-
-// You are a world-class English pronunciation coach, public speaking mentor, and content evaluator — strict yet highly encouraging.
-
-// Analyze the audio of the user explaining the video in their own words.
-// be very strict while giving the score
-
-// Return ONLY this exact JSON (no extra text, no markdown, no explanations):
-
-// {
-//   "transcription": "exact full transcription of what the user said (cleaned but 100% faithful). If no clear speech, use empty string.",
-//   "pronunciationScore": number (0-100, very strict: clarity, phonemes, intonation, pacing, fluency, accent issues),
-//   "pronunciationFeedback": "one short, encouraging paragraph (2-4 sentences) focused only on pronunciation, including tips on mispronounced words",
-//   "understandingScore": number (0-100),
-//   "understandingFeedback": "beautiful, motivational paragraph that covers:
-//     • how accurately the user matched the Target Summary (key points: hook, transition, credibility, structure)
-//     • sentence formation, grammar, vocabulary, coherence and professionalism
-//     • overall final verdict in a warm, celebratory tone (e.g. 'Outstanding performance!', 'Solid foundation with room to shine', etc.)
-//     Make it feel premium and inspiring.",
-//   "mistakes": [
-//     {
-//       "word": "the mispronounced word",
-//       "user_pronunciation": "human-readable phonetic spelling of what the user said for this word, using syllable separation with · (e.g., 'en·vai·uh·muhnt')",
-//       "correct_pronunciation": "correct human-readable phonetic spelling for the word, using syllable separation with · (e.g., 'en·vai·uh·muhnt')",
-//       "issue": "short clear description of the pronunciation issue",
-//       "how_to_correct": "1-2 sentence practical tip to improve"
-//     }
-//     // max 5 items, empty array if none or only minor. Focus on specific words that were mispronounced.
-//   ]
-// }
-
-// CRITICAL RULES:
-// - If no clear human voice or audio too short/silent → set pronunciationScore: 0, understandingScore: 0, transcription: "", mistakes: [], and friendly "no voice" messages in both feedbacks.
-// - Pronunciation is evaluated on audio quality only (not against any script — user is speaking freely). Use human-readable phonetic spellings (not IPA) in mistakes, with syllables separated by ·.
-// - UnderstandingScore = accuracy of content match (60%) + sentence formation/grammar/coherence (40%).
-// - Be strict on scores but always kind and constructive in feedback.
-// - Use beautiful, professional language for the final verdict inside understandingFeedback.
-// - For mistakes, only include entries for clearly mispronounced words, with accurate human-readable phonetic spellings for heard vs correct.
-// `;
-
-//     const result = await model.generateContent([
-//       { text: prompt },
-//       {
-//         inlineData: {
-//           data: req.file.buffer.toString('base64'),
-//           mimeType: "audio/wav"
-//         }
-//       }
-//     ]);
-
-//     const responseText = await result.response.text();
-//     const data = JSON.parse(responseText);
-
-//     // Optional safety: ensure required fields exist
-//     if (!data.transcription) data.transcription = "";
-//     if (!data.mistakes) data.mistakes = [];
-
-//     res.json(data);
-//   } catch (error) {
-//     console.error("ERROR in /evaluate-pronunciation-and-understanding:", error.message);
-//     res.status(500).json({
-//       error: "Server error during analysis",
-//       details: error.message
-//     });
-//   }
-// });
-
 app.post('/evaluate-pronunciation-and-understanding', upload.single('audio'), async (req, res) => {
   
   try {
@@ -599,7 +513,6 @@ CRITICAL RULES:
     });
   }
 });
-
 
 app.post('/evaluate', upload.single('audio'), async (req, res) => {
   try {
@@ -1016,7 +929,7 @@ app.post("/api/getStats", async (req, res) => {
 
 
 // 🧠 Sarvam AI Integration
-app.post('/api/ask', async (req, res) => {
+app.post('/ask', async (req, res) => {
   const { question, topic, stance, type, transcripts } = req.body;
   if (!question || !topic || !stance || !type || !Array.isArray(transcripts)) {
     return res.status(400).json({ error: 'Missing or invalid fields in /ask request' });
@@ -2100,12 +2013,6 @@ app.post('/api/save-transcripts', async (req, res) => {
 // 🚀 Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT} (DynamoDB - Users table only)`));
-
-
-
-
-
-
 
 
 
