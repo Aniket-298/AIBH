@@ -442,7 +442,7 @@ app.post('/evaluate-pronunciation-and-understanding', upload.single('audio'), as
     }
 
     const model = genAI.getGenerativeModel({
-      model: "gemini-2.5-flash", // keep exactly what you already use
+      model: "gemini-3-flash-preview", // keep exactly what you already use
       generationConfig: { responseMimeType: "application/json" }
     });
 
@@ -2013,6 +2013,7 @@ app.post('/api/save-transcripts', async (req, res) => {
 // 🚀 Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT} (DynamoDB - Users table only)`));
+
 
 
 
