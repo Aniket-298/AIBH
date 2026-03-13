@@ -600,6 +600,7 @@ CRITICAL RULES:
   }
 });
 
+
 app.post('/evaluate', upload.single('audio'), async (req, res) => {
   try {
     const { targetText } = req.body;
@@ -2099,6 +2100,7 @@ app.post('/api/save-transcripts', async (req, res) => {
 // 🚀 Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT} (DynamoDB - Users table only)`));
+
 
 
 
